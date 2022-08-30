@@ -1,14 +1,16 @@
-.Card {
+.Scene {
     min-width: 300px;
     cursor: move;
+  min-height: 500px;
+
 }
 
 @media screen and (max-width: 403px) {
-    .Card {
+    .Scene {
         margin: auto;
 
     }
-    .Card.Card_Animate--Center {
+    .Scene.Card_Animate--Center {
         transform: translateY(50%);
         transition: all 0.25s ease-in-out;
     }

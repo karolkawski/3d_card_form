@@ -7,11 +7,11 @@ import {
   Row
 } from 'antd';
 import React, { useState } from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css'; 
 import './Gui.css';
 import moment from 'moment'
 import Cleave from 'cleave.js/react';
-import {setPreviewBoolean} from '../Card/Card'
+// import {setPreviewBoolean} from '../Scene/Scene'
 import { onFinishAnimation } from '../Animations/onFinishAnimation';
 import { onReturnAnimation } from '../Animations/onReturnAnimation';
 
@@ -20,7 +20,7 @@ const GuiElement = ({children}) => {
 } 
 
 
-export const onReturnClick = () => onReturnAnimation(() => setPreviewBoolean(false));
+export const onReturnClick = () => onReturnAnimation(() => '');
 
 export default function Gui({details,handleFormChange }) {
   
@@ -31,7 +31,7 @@ export default function Gui({details,handleFormChange }) {
   };
 
 
-  const onFinish = () => onFinishAnimation(() => setPreviewBoolean(true));
+  const onFinish = () => onFinishAnimation(() => '');
 
   const onFinishFailed = (errorInfo) => console.error('Failed:', errorInfo);
 
@@ -86,35 +86,34 @@ export default function Gui({details,handleFormChange }) {
           </Row>
           <Row >
             <Col span={24} >
-            <Form.Item labelCol={{ span: 4 }} name="card_number"  rules={[{required: true,message: "Please input your card number!"}]}
-                    wrapperCol={{ span: 19 }} 
-                    label={'Number'} >
-                      <Cleave placeholder="Enter your credit card number"
-                          options={{creditCard: true,     numericOnly: true}}
-                          value={details.card_number || ''} 
-                          className={'ant-input'}
-                          onChange={e => handleFormChange(e, 'card_number')} />
-                    </Form.Item>
-
+              <Form.Item labelCol={{ span: 4 }} name="card_number"  rules={[{required: true,message: "Please input your card number!"}]}
+                      wrapperCol={{ span: 19 }} 
+                      label={'Number'} >
+                        <Cleave placeholder="Enter your credit card number"
+                            options={{creditCard: true,     numericOnly: true}}
+                            value={details.card_number || ''} 
+                            className={'ant-input'}
+                            onChange={e => handleFormChange(e, 'card_number')} />
+              </Form.Item>
             </Col>
           </Row>
           <Row>
             <Col span={16}>
-            <Form.Item labelCol={{ span: 6 }} name="card_exp"
-                    wrapperCol={{ span: 14}} label={'Valid date'} rules={[{required: true,message: "Please input your valid date!"}]}>
-                      <DatePicker   style={{width: '100%'}} value={moment(details.card_exp)  || ''} onChange={e => handleFormChange(e, 'card_exp')} format="DD/MM/YYYY"/>
-                    </Form.Item>
+              <Form.Item labelCol={{ span: 6 }} name="card_exp"
+                      wrapperCol={{ span: 14}} label={'Valid date'} rules={[{required: true,message: "Please input your valid date!"}]}>
+                        <DatePicker   style={{width: '100%'}} value={moment(details.card_exp)  || ''} onChange={e => handleFormChange(e, 'card_exp')} format="DD/MM/YYYY"/>
+              </Form.Item>
             </Col>
             <Col span={8}>
-            <Form.Item labelCol={{ span: 11 }} name="card_secure"
-                    wrapperCol={{ span: 10 }} label={'Sectret'} rules={[{required: true,message: "Please input your CVV!"}]}>
-                      <Cleave placeholder="CVV"
-                          options={{   blocks: [3],
-                            numericOnly: true}}
-                          value={details.card_secure || ''} 
-                          className={'ant-input'}
-                          onChange={e => handleFormChange(e, 'card_secure')} />
-                    </Form.Item>
+              <Form.Item labelCol={{ span: 11 }} name="card_secure"
+                      wrapperCol={{ span: 10 }} label={'Sectret'} rules={[{required: true,message: "Please input your CVV!"}]}>
+                        <Cleave placeholder="CVV"
+                            options={{   blocks: [3],
+                              numericOnly: true}}
+                            value={details.card_secure || ''} 
+                            className={'ant-input'}
+                            onChange={e => handleFormChange(e, 'card_secure')} />
+              </Form.Item>
             </Col>
           </Row>
           <Row>
