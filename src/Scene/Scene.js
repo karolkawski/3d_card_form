@@ -7,12 +7,13 @@ import './Scene.css'
 import { extend } from '@react-three/fiber'
 import { useTexture } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import Hevetiker from '../fonts/helvetiker_regular.typeface.json'
+import moment from 'moment';
 
 export const setPreviewBoolean = () => {
 
@@ -26,6 +27,7 @@ const CameraController = () => {
             controls.distance = 10;
             controls.minDistance = 10;
             controls.maxDistance = 10;
+            controls.update();
             return () => {
                 controls.dispose();
             };
@@ -35,14 +37,14 @@ const CameraController = () => {
         return null;
     };
 
-    export default function Scene({card}) {
+    export default function Scene({card, collapse, isMobile}) {
+      console.log("🚀 ~ file: Scene.js ~ line 41 ~ Scene ~ isMobile", card)
       const mesh = useRef(null)
+      // const [collapseValue, setCollapseValue] = useState(collapse)
+
+      // console.log('twsrt',collapseValue)
 
     
-
-      // useFrame(() => {
-      //   // animation code goes here
-      // })
 
       // const TextMesh = ({text, position, rotation, font, size}) => {
 
@@ -75,9 +77,17 @@ const CameraController = () => {
               });
               return g;
             }, [obj]);
+
+            useFrame(() => {
+              // animation code goes here
+              if (mesh.current) {
+                console.log(mesh.current.rotation)
+                mesh.current.rotation.y += 0.01;
+              }
+            })
           
             return (
-              <group rotation={[0, 0, Math.PI/3]}>
+              <group rotation={[0, 0, Math.PI/3]} ref={mesh}>
                 <mesh geometry={geometry}>
                   <meshPhysicalMaterial map={texture} />
                   <group >
@@ -118,7 +128,7 @@ const CameraController = () => {
                     </mesh>
 
                     <mesh position={[-1.8,0,0.1]} rotation={[0, 0, -Math.PI/2]}>
-                      <textGeometry attach='geometry' args={[`${card.card_exp}`, {
+                      <textGeometry attach='geometry' args={[`${moment(card.card_exp).format('DD/MM/YYYY')}`, {
                         font,
                         size: 0.15,
                         height: 0.01,
@@ -141,18 +151,19 @@ const CameraController = () => {
     }
   
 
-    useEffect(() => {
+    // useEffect(() => {
+    //   // console.log('collpase state', collapse)
+    //   setCollapseValue(collapse)
 
+    // }, [collapse])
 
-    }, [card])
-
-    return ( <Canvas className="Scene" style={{
-                  height: '500px',
+    return ( <Canvas className={isMobile && collapse ? "Scene Scene__Collapse" : "Scene"} style={{
+                  height: isMobile && collapse ? '100px' : '500px',
                   maxWidth: '100vw'
                 }} ref={mesh}>
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />
-                <CameraController />
+                <CameraController distance={10}/>
                 <Card3D />
             </Canvas>)
 } 

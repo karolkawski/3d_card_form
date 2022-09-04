@@ -15,16 +15,19 @@ import Cleave from 'cleave.js/react';
 import { onFinishAnimation } from '../Animations/onFinishAnimation';
 import { onReturnAnimation } from '../Animations/onReturnAnimation';
 
-const GuiElement = ({children}) => {
-  return <div className="Gui">{children}</div>
+const GuiElement = ({children, className}) => {
+  console.log("🚀 ~ file: Gui.js ~ line 19 ~ GuiElement ~ className", className)
+  return <div className={className}>{children}</div>
 } 
 
 
 export const onReturnClick = () => onReturnAnimation(() => '');
 
-export default function Gui({details,handleFormChange }) {
+export default function Gui({details, handleFormChange, collapse, isMobile, handleCollapse }) {
   
   const [componentSize, setComponentSize] = useState('default');
+  // const [collapseValue, setCollapseValue] = useState(collapse);
+
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
@@ -32,13 +35,28 @@ export default function Gui({details,handleFormChange }) {
 
 
   const onFinish = () => onFinishAnimation(() => '');
+  const onFocus = () => {
+    // console.log(isMobile.isMobile);
+    isMobile && handleCollapse(true); 
+    // setCollapseValue(true);
+  };
+  const onBlur = () => {
+    console.log(isMobile);
+
+    isMobile && handleCollapse(false)
+    // setCollapseValue(false);
+
+  }
+
+
 
   const onFinishFailed = (errorInfo) => console.error('Failed:', errorInfo);
 
     return (
 
-        <GuiElement>
+        <GuiElement onChange={e => handleFormChange(e, 'last_name')} className={isMobile && collapse ? 'Gui Gui__Collapse' : 'Gui'}>
           <Form
+
           labelAlign="left"
           layout="horizontal"
           initialValues={{
@@ -47,7 +65,7 @@ export default function Gui({details,handleFormChange }) {
           }}
           onValuesChange={onFormLayoutChange}
           size={componentSize}
-          onFinish={onFinish}
+          onFinish={onFinish} 
           onFinishFailed={onFinishFailed}
           fields={[
             {
@@ -75,12 +93,14 @@ export default function Gui({details,handleFormChange }) {
           <Row >
             <Col span={12} > 
               <Form.Item label={'Name'} labelCol={{ span:8 }} name="first_name" rules={[{required: true,message: "Please input your first name!"}]}
-                    wrapperCol={{ span: 14 }}><Input maxLength={18} value={details.first_name || ''} onChange={e => handleFormChange(e, 'first_name')}/></Form.Item>
+                    wrapperCol={{ span: 14 }}><Input maxLength={18} value={details.first_name || ''} onFocus={ onFocus } 
+                    onBlur={ onBlur } onChange={e => handleFormChange(e, 'first_name')}/></Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item label={'Surname'} labelCol={{ span: 8 }} name="last_name" rules={[{required: true,message: "Please input your last name!"}]}
                       wrapperCol={{ span: 14 }}>
-                <Input maxLength={18} value={details.last_name || ''} onChange={e => handleFormChange(e, 'last_name')}/>
+                <Input maxLength={18} value={details.last_name || ''} onFocus={ onFocus } 
+                    onBlur={ onBlur } onChange={e => handleFormChange(e, 'last_name')}/>
               </Form.Item>
             </Col>
           </Row>
@@ -93,6 +113,8 @@ export default function Gui({details,handleFormChange }) {
                             options={{creditCard: true,     numericOnly: true}}
                             value={details.card_number || ''} 
                             className={'ant-input'}
+                            onFocus={ onFocus } 
+                    onBlur={ onBlur } 
                             onChange={e => handleFormChange(e, 'card_number')} />
               </Form.Item>
             </Col>
@@ -101,7 +123,8 @@ export default function Gui({details,handleFormChange }) {
             <Col span={16}>
               <Form.Item labelCol={{ span: 6 }} name="card_exp"
                       wrapperCol={{ span: 14}} label={'Valid date'} rules={[{required: true,message: "Please input your valid date!"}]}>
-                        <DatePicker   style={{width: '100%'}} value={moment(details.card_exp)  || ''} onChange={e => handleFormChange(e, 'card_exp')} format="DD/MM/YYYY"/>
+                        <DatePicker  onFocus={ onFocus } 
+                    onBlur={ onBlur } style={{width: '100%'}} value={moment(details.card_exp)  || ''} onChange={e => handleFormChange(e, 'card_exp')} format="DD/MM/YYYY"/>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -112,6 +135,8 @@ export default function Gui({details,handleFormChange }) {
                               numericOnly: true}}
                             value={details.card_secure || ''} 
                             className={'ant-input'}
+                            onFocus={ onFocus } 
+                    onBlur={ onBlur } 
                             onChange={e => handleFormChange(e, 'card_secure')} />
               </Form.Item>
             </Col>
