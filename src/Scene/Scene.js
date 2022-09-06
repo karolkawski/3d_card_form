@@ -38,26 +38,21 @@ const CameraController = () => {
     };
 
     export default function Scene({card, collapse, isMobile}) {
-      console.log("🚀 ~ file: Scene.js ~ line 41 ~ Scene ~ isMobile", card)
-      const mesh = useRef(null)
-      // const [collapseValue, setCollapseValue] = useState(collapse)
+      const mesh = useRef();
 
-      // console.log('twsrt',collapseValue)
+      const TextMesh = ({data}) => {
+        const {text, position, rotation, font, size} = data;
 
-    
+        return  <mesh position={position} rotation={rotation}>
+          <textGeometry attach='geometry' args={[text, {
+            font,
+            size,
+            height: 0.01,
+          }]} />
+            <meshStandardMaterial attach='material' />
+          </mesh>
 
-      // const TextMesh = ({text, position, rotation, font, size}) => {
-
-      //   return  <mesh position={[1.5,3.9,0.1]} rotation={[0, 0, -Math.PI/2]}>
-      //     <textGeometry attach='geometry' args={[`Revoult`, {
-      //       font,
-      //       size: 0.5,
-      //       height: 0.01,
-      //     }]} />
-      //       <meshStandardMaterial attach='material' />
-      //     </mesh>
-
-      // }
+      }
 
      const Card3D = () => {
 
@@ -67,7 +62,53 @@ const CameraController = () => {
             const font = new FontLoader().parse(Hevetiker);
             extend({ TextGeometry })
 
+            const texts = {
+              card_owner: {
+                position: [-2.3,3.9,0.1],
+                text: `${card.first_name} ${card.last_name}`,
+                rotation: [0, 0, -Math.PI/2],
+                size: 0.4,
+                font
+              },
+              bank_name: {
+                position: [1.5,3.9,0.1],
+                text: 'Revoult',
+                rotation: [0, 0, -Math.PI/2],
+                size: 0.5,
+                font
 
+
+              },
+              card_number: {
+                position: [-1,3.9,0.1],
+                text: card.card_number,
+                rotation: [0, 0, -Math.PI/2],
+                size: 0.5,
+                font
+              },
+              valid_thru: {
+                position:[-1.5,0,0.1],
+                text: 'VALID THTU',
+                rotation: [0, 0, -Math.PI/2],
+                size: 0.15,
+                font
+              },
+              card_exp: {
+                position:[-1.8,0,0.1],
+                text: `${moment(card.card_exp).format('DD/MM/YYYY')}`,
+                rotation: [0, 0, -Math.PI/2],
+                size: 0.15,
+                font
+              },
+              card_secure: {
+                position:[-1,3.9,-0.1],
+                text: card.card_secure,
+                rotation: [0, 0, 0],
+                size: 0.3,
+                font
+              }
+            }
+      
             const geometry = useMemo(() => {
               let g;
               obj.traverse((c) => {
@@ -78,72 +119,20 @@ const CameraController = () => {
               return g;
             }, [obj]);
 
-            useFrame(() => {
-              // animation code goes here
-              if (mesh.current) {
-                console.log(mesh.current.rotation)
-                mesh.current.rotation.y += 0.01;
-              }
-            })
+            useEffect(()=> {
+              console.log('update mesh')
+
+            }, [])
           
             return (
               <group rotation={[0, 0, Math.PI/3]} ref={mesh}>
                 <mesh geometry={geometry}>
                   <meshPhysicalMaterial map={texture} />
                   <group >
-                    <mesh position={[-2.3,3.9,0.1]} rotation={[0, 0, -Math.PI/2]}>
-                    <textGeometry attach='geometry' args={[`${card.first_name} ${card.last_name}`, {
-                      font,
-                      size: 0.4,
-                      height: 0.01,
-                    }]} />
-                    <meshStandardMaterial attach='material' />
-                    </mesh>
-
-                    <mesh position={[1.5,3.9,0.1]} rotation={[0, 0, -Math.PI/2]}>
-                      <textGeometry attach='geometry' args={[`Revoult`, {
-                        font,
-                        size: 0.5,
-                        height: 0.01,
-                      }]} />
-                      <meshStandardMaterial attach='material' />
-                    </mesh>
-
-                    <mesh position={[-1,3.9,0.1]} rotation={[0, 0, -Math.PI/2]}>
-                      <textGeometry attach='geometry' args={[card.card_number, {
-                        font,
-                        size: 0.5,
-                        height: 0.01,
-                      }]} />
-                      <meshStandardMaterial attach='material' />
-                      </mesh>
-
-                      <mesh position={[-1.5,0,0.1]} rotation={[0, 0, -Math.PI/2]}>
-                      <textGeometry attach='geometry' args={['VALID THRU', {
-                        font,
-                        size: 0.15,
-                        height: 0.01,
-                      }]} />
-                      <meshStandardMaterial attach='material' />
-                    </mesh>
-
-                    <mesh position={[-1.8,0,0.1]} rotation={[0, 0, -Math.PI/2]}>
-                      <textGeometry attach='geometry' args={[`${moment(card.card_exp).format('DD/MM/YYYY')}`, {
-                        font,
-                        size: 0.15,
-                        height: 0.01,
-                      }]} />
-                      <meshStandardMaterial attach='material' />
-                    </mesh>
-
-                    <mesh position={[-1,3.9,-0.1]} >
-                      <textGeometry attach='geometry' args={[card.card_secure, {
-                        font,
-                        size: 0.3,
-                        height: 0.01,
-                      }]} />
-                      <meshStandardMaterial attach='material' />
-                    </mesh>
+                    {Object.keys(texts).map((key) => {
+                      const data = texts[key];
+                      return <TextMesh data={data}/>
+                    })}
                   </group>
                 </mesh>
               </group>
@@ -151,11 +140,6 @@ const CameraController = () => {
     }
   
 
-    // useEffect(() => {
-    //   // console.log('collpase state', collapse)
-    //   setCollapseValue(collapse)
-
-    // }, [collapse])
 
     return ( <Canvas className={isMobile && collapse ? "Scene Scene__Collapse" : "Scene"} style={{
                   height: isMobile && collapse ? '100px' : '500px',

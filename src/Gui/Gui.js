@@ -11,23 +11,18 @@ import 'antd/dist/antd.min.css';
 import './Gui.css';
 import moment from 'moment'
 import Cleave from 'cleave.js/react';
-// import {setPreviewBoolean} from '../Scene/Scene'
 import { onFinishAnimation } from '../Animations/onFinishAnimation';
 import { onReturnAnimation } from '../Animations/onReturnAnimation';
 
 const GuiElement = ({children, className}) => {
-  console.log("🚀 ~ file: Gui.js ~ line 19 ~ GuiElement ~ className", className)
   return <div className={className}>{children}</div>
 } 
-
 
 export const onReturnClick = () => onReturnAnimation(() => '');
 
 export default function Gui({details, handleFormChange, collapse, isMobile, handleCollapse }) {
   
   const [componentSize, setComponentSize] = useState('default');
-  // const [collapseValue, setCollapseValue] = useState(collapse);
-
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
@@ -35,19 +30,8 @@ export default function Gui({details, handleFormChange, collapse, isMobile, hand
 
 
   const onFinish = () => onFinishAnimation(() => '');
-  const onFocus = () => {
-    // console.log(isMobile.isMobile);
-    isMobile && handleCollapse(true); 
-    // setCollapseValue(true);
-  };
-  const onBlur = () => {
-    console.log(isMobile);
-
-    isMobile && handleCollapse(false)
-    // setCollapseValue(false);
-
-  }
-
+  const onFocus = () => isMobile && handleCollapse(true);
+  const onBlur = () => isMobile && handleCollapse(false);
 
 
   const onFinishFailed = (errorInfo) => console.error('Failed:', errorInfo);

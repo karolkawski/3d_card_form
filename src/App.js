@@ -13,8 +13,7 @@ import useDeviceDetect from './utils/useDeviceDetect';
 function App() {
   const [details, setDetails] = useState({...storage})
   const [collapse, setCollapse] = useState(false);
-  const [isMobile, setIsMobile] = useState(useDeviceDetect().isMobile);
-
+  const isMobile = useDeviceDetect().isMobile;
 
 
   const handleFormChange =(e, attr) => {
@@ -31,15 +30,10 @@ function App() {
   }
 
 
-
   const handleCollapse =(show) => {
-    console.log('old state', show, isMobile);
-
     isMobile && setCollapse(show)
-
   }
 
-  
   return (
     <div className="App">
         <Gui className="App_Form"details={{...details}} handleFormChange={(e, attr) => {handleFormChange(e, attr)}} handleCollapse={(show) => {handleCollapse(show)}} collapse={collapse} isMobile={isMobile}/>

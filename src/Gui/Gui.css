@@ -10,6 +10,7 @@
     left: 0;
     right: 0;
     margin: auto;
+    z-index: 1000;
 }
 
 .Gui__Collapse {
@@ -35,9 +36,3 @@
     
     }
 }
-
-/* @media screen and (max-width: 430px) {
-    .Gui {
-        position: unset;
-    }
-} */
