@@ -3,17 +3,12 @@ import Gui from './Gui/Gui';
 import Scene from './Scene/Scene';
 import { storage } from './storage';
 import { useState } from 'react';
-import { ReloadOutlined } from '@ant-design/icons';
-import {
-  Button
-} from 'antd';
-import {onReturnClick} from './Gui/Gui';
-import useDeviceDetect from './utils/useDeviceDetect';
 
 function App() {
   const [details, setDetails] = useState({...storage})
-  const [collapse, setCollapse] = useState(false);
-  const isMobile = useDeviceDetect().isMobile;
+  const [confirmed, setConfirmed] = useState(false);
+  // const [collapse, setCollapse] = useState(false);
+  // const isMobile = useDeviceDetect().isMobile;
 
 
   const handleFormChange =(e, attr) => {
@@ -30,16 +25,20 @@ function App() {
   }
 
 
-  const handleCollapse =(show) => {
-    isMobile && setCollapse(show)
-  }
+  // const handleCollapse =(show) => {
+  //   isMobile && setCollapse(show)
+  // }
+  const handleConfirmed =(boleean) => {
+    console.log("🚀 ~ file: App.js ~ line 26 ~ handleConfirmed ~ boleean", boleean)
+    setConfirmed(boleean);
 
+  }
   return (
     <div className="App">
-        <Gui className="App_Form"details={{...details}} handleFormChange={(e, attr) => {handleFormChange(e, attr)}} handleCollapse={(show) => {handleCollapse(show)}} collapse={collapse} isMobile={isMobile}/>
+        <Gui className="App_Form"details={{...details}} confirmed={confirmed} handleConfirmed={(boolean) => handleConfirmed(boolean)}  handleFormChange={(e, attr) => {handleFormChange(e, attr)}} />
        <div className="App_Frame">
-        <Scene className="App_Scene" card={{...details}} collapse={collapse} isMobile={isMobile}/>
-        <Button ghost={true} className="App_Button App_Button--Return" shape="circle" onClick={e => onReturnClick(e)}icon={<ReloadOutlined />} />
+        <Scene className="App_Scene" card={{...details}} confirmed={confirmed}/>
+        {/* <Button ghost={true} className="App_Button App_Button--Return" shape="circle" onClick={e => onReturnClick(e)}icon={<ReloadOutlined />} /> */}
       </div>
     </div>
   ); 
