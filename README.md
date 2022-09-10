@@ -8,13 +8,11 @@ This is a simple integration of React and Threejs by two ways. There are two ver
 ## Features
 
 -   Change card details (card owner, card number, card csv, card expire date)
--   Collapse mode for mobile when keyboard show
 -   Live 3d card preview
--   Some animations
 
 ## Tech Stack
 
-**Client:** React, Three.js, Moment, Ant Design, Cleave, Jest, react-threejs-fiber
+**Client:** React, Three.js, Moment, Ant Design, Cleave, react-threejs-fiber
 
 ## Authors
 
@@ -31,32 +29,6 @@ https://3d-card-form.netlify.app/
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://link-to-project
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
 
 ## License
 
