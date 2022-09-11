@@ -22,7 +22,6 @@ function App() {
 	};
 
 	const handleConfirmed = (boleean) => {
-		console.log("🚀 ~ file: App.js ~ line 26 ~ handleConfirmed ~ boleean", boleean);
 		setConfirmed(boleean);
 	};
 	return (

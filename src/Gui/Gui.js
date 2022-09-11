@@ -4,14 +4,11 @@ import "antd/dist/antd.min.css";
 import "./Gui.css";
 import moment from "moment";
 import Cleave from "cleave.js/react";
-import { onReturnAnimation } from "../Animations/onReturnAnimation";
 import { ReloadOutlined, CheckOutlined } from "@ant-design/icons";
 
 const GuiElement = ({ children, className }) => {
 	return <div className={className}>{children}</div>;
 };
-
-export const onReturnClick = () => onReturnAnimation(() => "");
 
 export default function Gui({ details, handleFormChange, confirmed, handleConfirmed }) {
 	const [componentSize, setComponentSize] = useState("default");
@@ -20,7 +17,7 @@ export default function Gui({ details, handleFormChange, confirmed, handleConfir
 		setComponentSize(size);
 	};
 
-	const onFinish = () => console.log(true);
+	const onFinish = () => console.info(true);
 
 	const onFinishFailed = (errorInfo) => console.error("Failed:", errorInfo);
 

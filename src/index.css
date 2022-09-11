@@ -1,38 +1,37 @@
 body {
-    /* Body (M) */
+	/* Body (M) */
 
-font-family: 'Space Grotesk';
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 15px;
-letter-spacing: 2px;
-text-transform: uppercase;
+	font-family: "Space Grotesk";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 15px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
 
-/* Deep Violet */
+	/* Deep Violet */
 
-color: #21092F;
+	color: #21092f;
 }
 
 @font-face {
-    font-family: "SpaceGrotesk";
-    src: local("SpaceGrotesk"),
-     url("./fonts/spacegrotesk/SpaceGrotesk-Medium.otf");
-    font-weight: normal;
+	font-family: "SpaceGrotesk";
+	src: local("SpaceGrotesk"), url("./fonts/spacegrotesk/SpaceGrotesk-Medium.otf");
+	font-weight: normal;
 }
 
 /* overriders ant design */
 .ant-btn-primary {
-    background: #21092F;
-    border-radius: 8px;
+	background: #21092f;
+	border-radius: 8px;
 }
 
 .ant-btn-primary:active {
-    background: #21092F;
-    border-radius: 8px;
+	background: #21092f;
+	border-radius: 8px;
 }
 
 .ant-btn-primary:hover {
-    background: #21092F;
-    border-radius: 8px;
+	background: #21092f;
+	border-radius: 8px;
 }

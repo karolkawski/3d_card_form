@@ -26,10 +26,6 @@ This is a simple integration of React and Threejs by two ways. There are two ver
 
 https://3d-card-form.netlify.app/
 
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
