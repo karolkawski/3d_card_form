@@ -1,4 +1,4 @@
-.Gui {
+.App_Gui {
 	position: absolute;
 	width: 327px;
 	height: 328px;
@@ -98,7 +98,7 @@
 }
 
 @media screen and (min-width: 375px) {
-	.Gui {
+	.App_Gui {
 		position: absolute;
 		min-width: 327px;
 		/* max-width:550px; */
@@ -112,7 +112,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-	.Gui {
+	.App_Gui {
 		width: 80%;
 		display: flex;
 		top: 0;
@@ -124,3 +124,4 @@
 		align-items: center;
 	}
 }
+

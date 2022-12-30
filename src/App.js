@@ -16,6 +16,7 @@ function App() {
 		} else {
 			data = e.target.value;
 		}
+		console.log(data);
 		const copy = { ...details };
 		copy[attr] = data;
 		setDetails(copy);
@@ -27,7 +28,7 @@ function App() {
 	return (
 		<div className="App">
 			<Gui
-				className="App_Form"
+				className="App_Gui"
 				details={{ ...details }}
 				confirmed={confirmed}
 				handleConfirmed={(boolean) => handleConfirmed(boolean)}

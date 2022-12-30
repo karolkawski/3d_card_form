@@ -82,14 +82,14 @@ const Card3D = ({ card, confirmed, reset, mesh }) => {
 			position: [-1.5, 0, 0.1],
 			text: "VALID THTU",
 			rotation: [0, 0, -Math.PI / 2],
-			size: 0.15,
+			size: 0.2,
 			font,
 		},
 		card_exp: {
 			position: [-1.8, 0, 0.1],
 			text: `${moment(card.card_exp).format("DD/MM/YYYY")}`,
 			rotation: [0, 0, -Math.PI / 2],
-			size: 0.15,
+			size: 0.2,
 			font,
 		},
 		card_secure: {
@@ -112,7 +112,7 @@ const Card3D = ({ card, confirmed, reset, mesh }) => {
 	}, [obj]);
 
 	return (
-		<group rotation={[0, 0, Math.PI / 2]} ref={mesh}>
+		<group rotation={[0, 0, Math.PI / 2]} ref={mesh} scale={0.8}>
 			<mesh geometry={geometry}>
 				<meshPhysicalMaterial map={texture} />
 				<group>
@@ -130,19 +130,26 @@ export default function Scene({ card, confirmed }) {
 	const mesh = useRef();
 
 	return (
-		<Canvas
-			className={"Scene"}
+		<div
+			className="App_Scene"
 			style={{
-				height: window.innerWidth,
-				maxWidth: "100vw",
+				width: window.innerWidth > 390 ? window.innerWidth / 2 : 350,
+				height: "100%",
 			}}
-			ref={mesh}
 		>
-			<ambientLight />
-			<pointLight position={[10, 10, 10]} />
-			<CameraController distance={10} />
-			<Card3D card={card} confirmed={confirmed} mesh={mesh} />
-		</Canvas>
+			<Canvas
+				className={"App_Canvas"}
+				ref={mesh}
+				style={{
+					width: window.innerWidth > 390 ? window.innerWidth / 2 : 350,
+				}}
+			>
+				<ambientLight />
+				<pointLight position={[10, 10, 10]} />
+				<CameraController distance={10} />
+				<Card3D card={card} confirmed={confirmed} mesh={mesh} />
+			</Canvas>
+		</div>
 	);
 }
 

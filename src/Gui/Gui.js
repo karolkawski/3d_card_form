@@ -22,12 +22,12 @@ export default function Gui({ details, handleFormChange, confirmed, handleConfir
 	const onFinishFailed = (errorInfo) => console.error("Failed:", errorInfo);
 
 	return (
-		<GuiElement onChange={(e) => handleFormChange(e, "last_name")} className={"Gui"}>
+		<GuiElement onChange={(e) => handleFormChange(e, "last_name")} className={"App_Gui"}>
 			<Form
 				labelAlign="left"
 				layout="horizontal"
 				initialValues={{
-					size: componentSize,
+					size: window.innerWidth + 100,
 					details: details,
 				}}
 				onValuesChange={onFormLayoutChange}

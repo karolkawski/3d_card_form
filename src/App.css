@@ -15,7 +15,7 @@
 	position: absolute;
 	width: 100%;
 	min-width: 375px;
-	height: 240px;
+	height: 350px;
 	left: 0px;
 	top: 0px;
 
@@ -45,7 +45,7 @@
 	}
 
 	.App_Frame canvas {
-		margin-left: 100%;
+		margin-left: 25%;
 	}
 }
 

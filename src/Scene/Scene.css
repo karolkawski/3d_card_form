@@ -1,5 +1,4 @@
-.Card {
-	max-width: 457px;
-	max-height: 457px;
-	position: absolute;
+.App_Scene {
+	overflow: visible !important;
 }
+
