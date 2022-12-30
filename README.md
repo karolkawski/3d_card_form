@@ -14,6 +14,10 @@ This is a simple integration of React and Threejs by two ways. There are two ver
 
 **Client:** React, Three.js, Moment, Ant Design, Cleave, react-threejs-fiber
 
+## Model and Textures
+
+https://www.cgtrader.com/free-3d-models/electronics/other/visa-credit-card (modificated)
+
 ## Authors
 
 -   [@karolkawski](https://www.github.com/karolkawski)
