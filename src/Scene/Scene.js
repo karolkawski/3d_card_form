@@ -72,8 +72,8 @@ export default function Scene({ card, confirmed }) {
 		const nameFontSize = `${card.first_name} ${card.last_name}`.length >= 16 ? 0.4 : 0.8;
 		group.add(makeText(`${card.first_name} ${card.last_name}`, { x: -2.25, y: 3.5, z }, 1, nameFontSize, "card-name"));
 
-		group.add(makeText("VALID THRU", { x: -1.5, y: -0.8, z }, 1, 0.3, "valid-text"));
-		group.add(makeText(moment(card.card_exp).format("DD/MM/YYYY"), { x: -1.75, y: -0.8, z }, 1, 0.3, "card-exp"));
+		group.add(makeText("VALID THRU", { x: -1.5, y: -0.6, z }, 1, 0.4, "valid-text"));
+		group.add(makeText(moment(card.card_exp).format("DD/MM/YYYY"), { x: -1.85, y: -0.6, z }, 1, 0.4, "card-exp"));
 
 		group.add(makeText(card.card_secure, { x: 0.1, y: 2.6, z: -0.01 }, 0, 0.5, "card-secure"));
 	};
@@ -190,6 +190,7 @@ export default function Scene({ card, confirmed }) {
 
 			//painting
 			object.name = "Card";
+			object.scale.set(0.1, 0.1, 0.1);
 			object.material = material;
 			object.children.map((child) => {
 				child.material = material;
@@ -248,7 +249,7 @@ export default function Scene({ card, confirmed }) {
 			if (group) {
 				group.children = [];
 				updateTextObjects(group, card);
-				onWindowResize();
+				// onWindowResize();
 			}
 		}
 	}, [card]);
